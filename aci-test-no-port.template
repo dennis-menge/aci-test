@@ -1,0 +1,28 @@
+apiVersion: '2019-12-01'
+type: Microsoft.ContainerInstance/containerGroups
+location: $REGION
+name: $CONTAINER_NAME
+properties: 
+  containers: 
+  - name: $CONTAINER_NAME
+    properties: 
+      image: ubuntu:20.04
+      command:
+      - "bash"
+      - "-c"
+      - "while true; do sleep 30; echo \"$(hostname) $(date)\"; done"
+      resources:
+        requests:
+          memoryInGB: 2
+          cpu: 1
+      volumeMounts: 
+      - name: build-emptydir
+        mountPath: /volume-mount
+        readOnly: false
+  restartPolicy: Never
+  networkProfile:
+    id: /subscriptions/$SUBSCRIPTION/resourceGroups/$RG/providers/Microsoft.Network/networkProfiles/networkprofile-$CONTAINER_NAME
+  osType: Linux
+  volumes: 
+  - name: build-emptydir
+    emptyDir: {}
