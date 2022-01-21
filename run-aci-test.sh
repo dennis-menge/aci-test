@@ -56,9 +56,9 @@ function create_aci(){
 function report_running_containers(){
     while true; do
         for instance in $(az container list --resource-group "${RG}" --query "[].name" -o tsv); do
-            echo "Checking Kill Signals for ${name}"
+            echo "Checking Kill Signals for ${instance}"
             kill_signals=$(az container show --resource-group "${RG}" --name "${instance}" --query "containers[].instanceView.events[].name" | jq  '.[] | select(. == "Killing")' | wc -l)
-            echo -e "--> Kill Signals for ${name} received: ${kill_signals}\n"
+            echo -e "--> Kill Signals for ${instance} received: ${kill_signals}\n"
         done
         echo -e "--> Sleeping 2 minutes until next iteration... \n\n"
         sleep 120;
