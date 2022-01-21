@@ -11,8 +11,6 @@ properties:
       - "bash"
       - "-c"
       - "while true; do sleep 30; echo \"$(hostname) $(date)\"; done"
-      ports:
-      - port: 80
       resources:
         requests:
           memoryInGB: 2
@@ -22,11 +20,6 @@ properties:
         mountPath: /volume-mount
         readOnly: false
   restartPolicy: Never
-  ipAddress:
-    ports:
-    - protocol: tcp
-      port: 80
-    type: Private
   networkProfile:
     id: /subscriptions/$SUBSCRIPTION/resourceGroups/$RG/providers/Microsoft.Network/networkProfiles/networkprofile-$CONTAINER_NAME
   osType: Linux
