@@ -1,0 +1,18 @@
+{
+    "location": "$REGION",
+    "properties": {
+        "containerNetworkInterfaceConfigurations": [{
+            "name": "eth1",
+            "properties": {
+                "ipConfigurations": [{
+                    "name": "ipconfig1",
+                    "properties": {
+                        "subnet": {
+                            "id": "/subscriptions/$SUBSCRIPTION/resourceGroups/$RG/providers/Microsoft.Network/virtualNetworks/$VNET/subnets/$SUBNET"
+                        }
+                    }
+                }]
+            }
+        }]
+    }
+}
